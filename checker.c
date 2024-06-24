@@ -43,11 +43,12 @@ int batterychargeRateCheck(float chargeRate)
 
 int batteryIsOk(float temperature, float soc, float chargeRate) 
 {
-  // int returnVal = 1;
-  // returnVal = batteryTempCheck(temperature);
-  // returnVal = batterySocCheck(soc);
-  // returnVal = batterychargeRateCheck(chargeRate);
-  return (batteryTempCheck(temperature) || batterySocCheck(soc) || batterychargeRateCheck(chargeRate) );
+ // int returnVal = 1;
+ // returnVal = batteryTempCheck(temperature);
+ // returnVal = batterySocCheck(soc);
+ // returnVal = batterychargeRateCheck(chargeRate);
+ // return returnVal;
+ return (batteryTempCheck(temperature) && batterySocCheck(soc) && batterychargeRateCheck(chargeRate) );
 }
 
 int main() {
