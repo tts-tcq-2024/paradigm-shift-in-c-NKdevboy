@@ -28,7 +28,7 @@ int batterySocCheck(float soc)
      }
 }
 
-int batterychargeRateCheck(float soc)
+int batterychargeRateCheck(float chargeRate)
 {
     if(chargeRate > 0.8) 
     {
