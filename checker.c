@@ -19,9 +19,12 @@ typedef enum
 	DEUTSCH
 }ListOfLang;
 
-#define TEMPERATURE 0
-#define SATEOFCHARGE 1
-#define CHARGERATE 2
+typedef enum
+{ 
+	TEMPERATURE,
+	SATEOFCHARGE,
+	CHARGERATE
+}ListOfProperties;
 
 
 typedef int(*BatteryPropertiesChecks)(float);
@@ -153,7 +156,7 @@ void CopyBatteryValueToLocalArr(float *arr,float Temperature, float Soc, float C
 int batteryIsOk(float Temperature, float Soc, float ChargeRate)
 {
   int returnVal = 1;
-  float ValueOfBatteryCheck[NOOFBATTERYPROPERTYCHECK]={0}
+  float ValueOfBatteryCheck[NOOFBATTERYPROPERTYCHECK]={0};
   
   CopyBatteryValueToLocalArr(ValueOfBatteryCheck,Temperature,Soc,ChargeRate);
   
