@@ -19,12 +19,10 @@ typedef enum
 	DEUTSCH
 }ListOfLang;
 
-typedef enum
-{
-  Temp,
-  Soc,
-  ChargeRate
-}ListOfProperties;
+#define Temp 0
+#define Soc 1
+#define ChargeRate 2
+
 
 typedef int(*BatteryPropertiesChecks)(float);
 
