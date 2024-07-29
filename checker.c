@@ -19,9 +19,9 @@ typedef enum
 	DEUTSCH
 }ListOfLang;
 
-#define Temp 0
-#define Soc 1
-#define ChargeRate 2
+#define TEMPERATURE 0
+#define SATEOFCHARGE 1
+#define CHARGERATE 2
 
 
 typedef int(*BatteryPropertiesChecks)(float);
@@ -56,14 +56,14 @@ BatteryPropertiesChecks ListOfPropertiesCheck[NOOFBATTERYPROPERTYCHECK] = ListPr
 
 // Setting specfic data 
 //min
-#define SetTempMinValue(value) (SetMinValues(Temp,(value)))
-#define SetSocpMinValue(value) (SetMinValues(Soc,(value)))
-#define SetChargeRateMinValue(value) (SetMinValues(ChargeRate,(value)))
+#define SetTempMinValue(value) (SetMinValues(TEMPERATURE,(value)))
+#define SetSocpMinValue(value) (SetMinValues(SATEOFCHARGE,(value)))
+#define SetChargeRateMinValue(value) (SetMinValues(CHARGERATE,(value)))
 
 //max
-#define SetTempMaxValue(value) (SetMaxValues(Temp,(value)))
-#define SetSocpMaxValue(value) (SetMaxValues(Soc,(value)))
-#define SetChargeRateMaxValue(value) (SetMaxValues(ChargeRate,(value)))
+#define SetTempMaxValue(value) (SetMaxValues(TEMPERATURE,(value)))
+#define SetSocpMaxValue(value) (SetMaxValues(SATEOFCHARGE,(value)))
+#define SetChargeRateMaxValue(value) (SetMaxValues(CHARGERATE,(value)))
 
 // getting data
 #define GetCurrentLanguage() (CurrentLang)
@@ -73,14 +73,14 @@ BatteryPropertiesChecks ListOfPropertiesCheck[NOOFBATTERYPROPERTYCHECK] = ListPr
 
 // getting specfic data 
 //min
-#define GetTempMinValue() (GetMinValues(Temp))
-#define GetSocpMinValue() (GetMinValues(Soc))
-#define GetChargeRateMinValue() (GetMinValues(ChargeRate))
+#define GetTempMinValue() (GetMinValues(TEMPERATURE))
+#define GetSocpMinValue() (GetMinValues(SATEOFCHARGE))
+#define GetChargeRateMinValue() (GetMinValues(CHARGERATE))
 
 //max
-#define GetTempMaxValue() (GetMaxValues(Temp))
-#define GetSocpMaxValue() (GetMaxValues(Soc))
-#define GetChargeRateMaxValue() (GetMaxValues(ChargeRate))
+#define GetTempMaxValue() (GetMaxValues(TEMPERATURE))
+#define GetSocpMaxValue() (GetMaxValues(SATEOFCHARGE))
+#define GetChargeRateMaxValue() (GetMaxValues(CHARGERATE))
 
 
 unsigned char CheckSmallerValue(float value,float ref)
