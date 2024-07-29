@@ -28,6 +28,13 @@ typedef enum
 
 typedef int(*BatteryPropertiesChecks)(float);
 
+
+int batteryIsOk(float Temperature, float Soc, float ChargeRate);
+void CopyBatteryValueToLocalArr(float *arr,float Temperature, float Soc, float ChargeRate);
+int batterychargeRateCheck(float ChargeRate);
+int batterySocCheck(float Soc);
+int batteryTempCheck(float Temperature);
+
 float MinValues[NOOFBATTERYPROPERTYCHECK]={0};
 float MaxValues[NOOFBATTERYPROPERTYCHECK]={0};
 unsigned char EarlyWarning[NOOFBATTERYPROPERTYCHECK]={0};
@@ -145,7 +152,7 @@ void CopyBatteryValueToLocalArr(float *arr,float Temperature, float Soc, float C
 	arr[2] = ChargeRate;
 }
 
-int batteryIsOk(float Temperature, float Soc, float ChargeRate) 
+int batteryIsOk(float Temperature, float Soc, float ChargeRate)
 {
   int returnVal = 1;
   float ValueOfBatteryCheck[NOOFBATTERYPROPERTYCHECK]={0}
