@@ -13,6 +13,11 @@
 
 #define NOOFBATTERYPROPERTYCHECK 3
 
+#define PASS 1
+#define FAIL 0
+
+#define LISTOFLANGUAGE 2
+
 typedef enum
 {
 	ENGLISH,
@@ -30,6 +35,7 @@ typedef enum
 typedef int(*BatteryPropertiesChecks)(float);
 
 
+
 int batteryIsOk(float Temperature, float Soc, float ChargeRate);
 void CopyBatteryValueToLocalArr(float *arr,float Temperature, float Soc, float ChargeRate);
 int batterychargeRateCheck(float ChargeRate);
@@ -39,7 +45,7 @@ int batteryTempCheck(float Temperature);
 float MinValues[NOOFBATTERYPROPERTYCHECK]={0};
 float MaxValues[NOOFBATTERYPROPERTYCHECK]={0};
 unsigned char EarlyWarning[NOOFBATTERYPROPERTYCHECK]={0};
-ListOfLang CurrentLang = ENGLISH;
+ListOfLang CurrentLang ;
 
 #define ListProperties \
 { \
@@ -50,6 +56,20 @@ ListOfLang CurrentLang = ENGLISH;
 
 
 BatteryPropertiesChecks ListOfPropertiesCheck[NOOFBATTERYPROPERTYCHECK] = ListProperties;
+
+char * ListofErrorMsg[LISTOFLANGUAGE][NOOFBATTERYPROPERTYCHECK] = 
+{
+	{
+		"Temperature out of range!\n",
+		"State of Charge out of range!\n",
+		"Charge Rate out of range!\n"
+	},
+	{
+		"Temperatur außerhalb des Bereichs!\n"
+		"Ladezustand außerhalb der Reichweite!\n"
+		"Gebührensatz außerhalb des Bereichs!\n"
+	}
+}
 
 // setting data 
 #define SetCurrentLanguage(value) (CurrentLang = (value))
@@ -85,50 +105,68 @@ BatteryPropertiesChecks ListOfPropertiesCheck[NOOFBATTERYPROPERTYCHECK] = ListPr
 #define GetSocpMaxValue() (GetMaxValues(SATEOFCHARGE))
 #define GetChargeRateMaxValue() (GetMaxValues(CHARGERATE))
 
+// GET error message 
+#define GetErrorMessage(value) ListofErrorMsg[(GetCurrentLanguage())][(value)]
 
 unsigned char CheckSmallerValue(float value,float ref)
 {
 	if(value < ref)
 	{
-		return 0;
+		return FAIL;
 	}
-	return 1;
+	return PASS;
 }
 
 unsigned char CheckLargerValue(float value,float ref)
 {
 	if(value > ref)
 	{
-		return 0;
+		return FAIL;
 	}
-	return 1;
+	return PASS;
+}
+
+unsigned char CheckBothValues(float value,float SmallRef,float LargerRef)
+{
+	return ((CheckSmallerValue(value,SmallRef))&&(CheckLargerValue(value,LargerRef)));
+}
+
+void PrintErrorMsg(ListOfProperties property)
+{
+	printf("%s",GetErrorMessage(property));
 }
 
 int batteryTempCheck(float Temperature)
 {
-	if(((CheckSmallerValue(Temperature,GetTempMinValue()))&&(CheckLargerValue(Temperature,GetTempMaxValue()))))
+	int retval = 255;
+	retval = CheckBothValues(Temperature,GetTempMinValue(),GetTempMaxValue());
+	if(!retval)
 	{
-		return 1;
+		PrintErrorMsg(TEMPERATURE);
 	}
-	return 0;
+	return retval;
 }
 
 int batterySocCheck(float Soc)
 {
-	if(((CheckSmallerValue(Soc,GetSocpMinValue()))&&(CheckLargerValue(Soc,GetSocpMaxValue()))))
+	int retval = 255;
+	retval = CheckBothValues(Soc,GetSocpMinValue(),GetSocpMaxValue());
+	if(!retval)
 	{
-		return 1;
+		PrintErrorMsg(SATEOFCHARGE);
 	}
-	return 0;
+	return retval;
 }
 
 int batterychargeRateCheck(float ChargeRate)
 {
-    if(CheckLargerValue(ChargeRate,GetChargeRateMaxValue()))
-    {
-        return 1;
-    }
-	return 0;
+	int retval = 255;
+	retval = CheckLargerValue(ChargeRate,GetChargeRateMaxValue());
+	if(!retval)
+	{
+		PrintErrorMsg(CHARGERATE);
+	}
+	return retval;
 }
 
 void init_call(void)
@@ -162,7 +200,7 @@ int batteryIsOk(float Temperature, float Soc, float ChargeRate)
   
   for(int Index = 0;Index < NOOFBATTERYPROPERTYCHECK;Index++ )
   {
-	 returnVal &= ListOfPropertiesCheck[Index](ValueOfBatteryCheck[Index]);
+	returnVal &= ListOfPropertiesCheck[Index](ValueOfBatteryCheck[Index]);
   }
 
   return returnVal;
