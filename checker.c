@@ -69,7 +69,7 @@ char * ListofErrorMsg[LISTOFLANGUAGE][NOOFBATTERYPROPERTYCHECK] =
 		"Ladezustand außerhalb der Reichweite!\n"
 		"Gebührensatz außerhalb des Bereichs!\n"
 	}
-}
+};
 
 // setting data 
 #define SetCurrentLanguage(value) (CurrentLang = (value))
