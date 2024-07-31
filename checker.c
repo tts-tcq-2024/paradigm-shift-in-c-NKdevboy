@@ -17,6 +17,7 @@
 #define FAIL 0
 
 #define LISTOFLANGUAGE 2
+#define EARLYWARNOTNEEDED NOT_VALID
 
 typedef enum
 {
@@ -47,6 +48,8 @@ float MaxValues[NOOFBATTERYPROPERTYCHECK]={0};
 unsigned char EarlyWarning[NOOFBATTERYPROPERTYCHECK]={0};
 ListOfLang CurrentLang ;
 
+#define LISTOFWARNINGPERPROPERTIES 2
+
 #define ListProperties \
 { \
 	batteryTempCheck, \
@@ -54,22 +57,72 @@ ListOfLang CurrentLang ;
 	batterychargeRateCheck, \
 }
 
+#define ALL_ERROR_MSG {ENGLISH_ERROR_MSG,DEUTSCH_ERROR_MSG}
+
+#define ENGLISH_ERROR_MSG \
+{ \
+"Temperature out of range!\n", \
+"State of Charge out of range!\n", \
+"Charge Rate out of range!\n" \
+}
+
+#define DEUTSCH_ERROR_MSG \
+{ \
+	"Temperatur außerhalb des Bereichs!\n" \
+	"Ladezustand außerhalb der Reichweite!\n" \
+	"Gebührensatz außerhalb des Bereichs!\n" \
+}
+
+// ENGLISH WARNING 
+#define WarningForTEMPERATUREHighENG {"Warning: Approaching high temperature limit!\n"}
+#define WarningForTEMPERATURELowENG  {"Warning: Approaching low temperature limit!\n"}
+
+#define ListOfWarningForTEMPERATUREENG {WarningForTEMPERATURELowENG,WarningForTEMPERATUREHighENG}
+
+#define WarningForSATEOFCHARGEHighENG {"Warning: Approaching high SOC limit!\n"}
+#define WarningForSATEOFCHARGELowENG  {"Warning: Approaching low SOC limit!\n"}
+
+#define ListOfWarningForSATEOFCHARGEENG {WarningForSATEOFCHARGELowENG,WarningForSATEOFCHARGEHighENG}
+
+#define WarningForCHARGERATEHighENG {"Warning: Approaching high Charge rate limit!\n"}
+#define WarningForCHARGERATELowENG  {NULL}
+
+#define ListOfWarningForCHARGERATEENG {WarningForCHARGERATELowENG,WarningForCHARGERATEHighENG}
+
+#define ALLENGLISHWARNING { \
+	ListOfWarningForTEMPERATUREENG, \
+	ListOfWarningForSATEOFCHARGEENG, \
+	ListOfWarningForCHARGERATEENG, \
+}
+// GERMANY WARNING
+#define WarningForTEMPERATUREHighGER {"Warnung: Annäherung an hohe Temperaturgrenze!\n"}
+#define WarningForTEMPERATURELowGER  {"Warnung: Annäherung an niedrige Temperaturgrenze!\n"}
+
+#define ListOfWarningForTEMPERATUREGER {WarningForTEMPERATURELowGER,WarningForTEMPERATUREHighGER}
+
+#define WarningForSATEOFCHARGEHighGER {"Warnung: Annäherung an hohes SoC-Limit!\n"}
+#define WarningForSATEOFCHARGELowGER  {"Warnung: Annäherung an niedrige SoC-Grenze!\n"}
+
+#define ListOfWarningForSATEOFCHARGEGER {WarningForSATEOFCHARGELowGER,WarningForSATEOFCHARGEHighGER}
+
+#define WarningForCHARGERATEHighGER {"Warnung: Annäherung an hohe Gebührenratenbegrenzung!\n"}
+#define WarningForCHARGERATELowGER  {NULL}
+
+#define ListOfWarningForCHARGERATEGER {WarningForCHARGERATELowGER,WarningForCHARGERATEHighGER}
+
+#define ALLGERMANYWARNING { \
+	ListOfWarningForTEMPERATUREGER, \
+	ListOfWarningForSATEOFCHARGEGER, \
+	ListOfWarningForCHARGERATEGER, \
+}
+
+#define TOTALWARNINGS {ALLENGLISHWARNING,ALLGERMANYWARNING}
 
 BatteryPropertiesChecks ListOfPropertiesCheck[NOOFBATTERYPROPERTYCHECK] = ListProperties;
 
-char * ListofErrorMsg[LISTOFLANGUAGE][NOOFBATTERYPROPERTYCHECK] = 
-{
-	{
-		"Temperature out of range!\n",
-		"State of Charge out of range!\n",
-		"Charge Rate out of range!\n"
-	},
-	{
-		"Temperatur außerhalb des Bereichs!\n"
-		"Ladezustand außerhalb der Reichweite!\n"
-		"Gebührensatz außerhalb des Bereichs!\n"
-	}
-};
+const char * ListofErrorMsg[LISTOFLANGUAGE][NOOFBATTERYPROPERTYCHECK] = ALL_ERROR_MSG;
+
+const char * ListofWarningMsg[LISTOFLANGUAGE][NOOFBATTERYPROPERTYCHECK][LISTOFWARNINGPERPROPERTIES] = TOTALWARNINGS;
 
 // setting data 
 #define SetCurrentLanguage(value) (CurrentLang = (value))
@@ -108,27 +161,27 @@ char * ListofErrorMsg[LISTOFLANGUAGE][NOOFBATTERYPROPERTYCHECK] =
 // GET error message 
 #define GetErrorMessage(value) ListofErrorMsg[(GetCurrentLanguage())][(value)]
 
-unsigned char CheckSmallerValue(float value,float ref)
+unsigned char CheckValueLessThanRef(float value,float ref)
 {
 	if(value < ref)
 	{
-		return FAIL;
+		return PASS;
 	}
-	return PASS;
+	return FAIL;
 }
 
-unsigned char CheckLargerValue(float value,float ref)
+unsigned char CheckValueGreaterThanRef(float value,float ref)
 {
 	if(value > ref)
 	{
-		return FAIL;
+		return PASS;
 	}
-	return PASS;
+	return FAIL;
 }
 
 unsigned char CheckBothValues(float value,float SmallRef,float LargerRef)
 {
-	return ((CheckSmallerValue(value,SmallRef))&&(CheckLargerValue(value,LargerRef)));
+	return ((CheckValueLessThanRef(value,LargerRef))&&(CheckValueGreaterThanRef(value,SmallRef)));
 }
 
 void PrintErrorMsg(ListOfProperties property)
@@ -161,7 +214,7 @@ int batterySocCheck(float Soc)
 int batterychargeRateCheck(float ChargeRate)
 {
 	int retval = 255;
-	retval = CheckLargerValue(ChargeRate,GetChargeRateMaxValue());
+	retval = CheckValueLessThanRef(ChargeRate,GetChargeRateMaxValue());
 	if(!retval)
 	{
 		PrintErrorMsg(CHARGERATE);
@@ -183,6 +236,21 @@ void init_call(void)
 	SetChargeRateMaxValue(MAX_CHAEGERATE);
 	
 }
+int CalculateWarningValue(unsigned char CurrentEarlyWar,int CurrentBatteryPro)
+{
+	return ((GetMaxValues(CurrentBatteryPro)*CurrentEarlyWar)/100);
+}
+
+void CheckEarlyWarning(int CurrentBatteryPro,float ValueOfBatteyPro)
+{
+	unsigned char CurrentEarlyWar = GetEarlyWarningPer(CurrentBatteryPro)
+	int WarningValue =0;
+	if(EARLYWARNOTNEEDED != CurrentEarlyWar)
+	{
+		WarningValue = CalculateWarningValue(CurrentEarlyWar,CurrentBatteryPro);
+		
+	}
+}
 
 void CopyBatteryValueToLocalArr(float *arr,float Temperature, float Soc, float ChargeRate)
 {
@@ -200,6 +268,7 @@ int batteryIsOk(float Temperature, float Soc, float ChargeRate)
   
   for(int Index = 0;Index < NOOFBATTERYPROPERTYCHECK;Index++ )
   {
+	CheckEarlyWarning(Index,ValueOfBatteryCheck[Index]);
 	returnVal &= ListOfPropertiesCheck[Index](ValueOfBatteryCheck[Index]);
   }
 
