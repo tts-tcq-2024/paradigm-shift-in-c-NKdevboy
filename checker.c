@@ -236,6 +236,7 @@ void init_call(void)
 	SetChargeRateMaxValue(MAX_CHAEGERATE);
 	
 }
+
 int CalculateWarningValue(unsigned char CurrentEarlyWar,int CurrentBatteryPro)
 {
 	return ((GetMaxValues(CurrentBatteryPro)*CurrentEarlyWar)/100);
@@ -243,8 +244,8 @@ int CalculateWarningValue(unsigned char CurrentEarlyWar,int CurrentBatteryPro)
 
 void CheckEarlyWarning(int CurrentBatteryPro,float ValueOfBatteyPro)
 {
-	unsigned char CurrentEarlyWar = GetEarlyWarningPer(CurrentBatteryPro)
 	int WarningValue =0;
+	unsigned char CurrentEarlyWar = GetEarlyWarningPer(CurrentBatteryPro);
 	if(EARLYWARNOTNEEDED != CurrentEarlyWar)
 	{
 		WarningValue = CalculateWarningValue(CurrentEarlyWar,CurrentBatteryPro);
