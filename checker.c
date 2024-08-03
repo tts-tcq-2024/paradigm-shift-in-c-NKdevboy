@@ -260,7 +260,7 @@ int CheckEarlyWarninginterface(float LowerValue,float LargerValue , float CutVal
 
 void PrintWaringMSGinterface(int WaringType , int CurrentBatteryPro)
 {
-	if(GetWaringMessage((CurrentBatteryPro),(WaringType-1)) ! = NULL)
+	if((GetWaringMessage((CurrentBatteryPro),(WaringType-1))) != NULL)
 	{
 		printf("%s",GetWaringMessage((CurrentBatteryPro),(WaringType-1)));
 	}
