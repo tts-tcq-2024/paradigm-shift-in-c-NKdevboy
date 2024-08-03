@@ -163,7 +163,7 @@ const char * ListofWarningMsg[LISTOFLANGUAGE][NOOFBATTERYPROPERTYCHECK][LISTOFWA
 // GET error message 
 #define GetErrorMessage(value) ListofErrorMsg[(GetCurrentLanguage())][(value)]
 
-#define GetWaringMessage(CurrentPro,WaringType) ListofWarningMsg[(GetCurrentLanguage())][(CurrentPro)][()]
+#define GetWaringMessage(CurrentPro,WaringType) ListofWarningMsg[(GetCurrentLanguage())][(CurrentPro)][(WaringType)]
 
 #define LOWType 1
 #define HIGHType 2
@@ -260,9 +260,9 @@ int CheckEarlyWarninginterface(float LowerValue,float LargerValue , float CutVal
 
 void PrintWaringMSGinterface(int WaringType , int CurrentBatteryPro)
 {
-	if(GetWaringMessage((CurrentBatteryPro),(WaringType)) ! = NULL)
+	if(GetWaringMessage((CurrentBatteryPro),(WaringType-1)) ! = NULL)
 	{
-		printf("%s",GetWaringMessage((CurrentBatteryPro),(WaringType)));
+		printf("%s",GetWaringMessage((CurrentBatteryPro),(WaringType-1)));
 	}
 }
 
