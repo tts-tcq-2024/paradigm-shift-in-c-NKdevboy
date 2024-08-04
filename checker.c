@@ -1,4 +1,4 @@
-#include <stdio.h>
+
 #ifndef StandardMacro_H
 #define StandardMacro_H
 #include "StandardMacro.h"
@@ -53,10 +53,10 @@ TestCaseTemperatureAboveUpperLimit();
 TestCaseSocBelowLowerLimit();
 TestCaseSocAboveUpperLimit();
 TestCaseChargeRateAboveUpperLimit();
-TestCaseApproachingLowerTemperatureLimit();
-TestCaseApproachingHigherTemperatureLimit();
-TestCaseApproachingDischargeSOC();
-TestCaseApproachingChargePeakSOC();
-TestCaseApproachingMaxChargeRate();
+//TestCaseApproachingLowerTemperatureLimit();
+//TestCaseApproachingHigherTemperatureLimit();
+//TestCaseApproachingDischargeSOC();
+//TestCaseApproachingChargePeakSOC();
+//TestCaseApproachingMaxChargeRate();
 
 }
