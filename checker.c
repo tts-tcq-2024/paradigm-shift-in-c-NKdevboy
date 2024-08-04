@@ -241,6 +241,9 @@ void init_call(void)
 	SetTempMaxValue(MAX_TEMP);
 	SetSocpMaxValue(MAX_SOC);
 	SetChargeRateMaxValue(MAX_CHAEGERATE);
+	SetEarlyWarningPer(TEMPERATURE,5);
+	SetEarlyWarningPer(SATEOFCHARGE,5);
+	SetEarlyWarningPer(CHARGERATE,5);
 	
 }
 
@@ -310,8 +313,71 @@ int batteryIsOk(float Temperature, float Soc, float ChargeRate)
   return returnVal;
 }
 
+
+
+void TestCaseCaseTemperatureBelowLowerLimit(void) 
+{
+    assert(!batteryIsOk(-10, 65, 0.5));
+}
+
+void TestCaseTemperatureAboveUpperLimit(void) 
+{
+    assert(!batteryIsOk(55, 65, 0.5));
+}
+
+void TestCaseSocBelowLowerLimit(void) 
+{
+    assert(!batteryIsOk(25, 10, 0.5));
+}
+
+void TestCaseSocAboveUpperLimit(void) 
+{
+    assert(!batteryIsOk(25, 91, 0.5));
+}
+
+void TestCaseChargeRateAboveUpperLimit(void) 
+{
+    assert(!batteryIsOk(25, 55, 1.0));
+}
+
+void TestCaseApproachingLowerTemperatureLimit(void) 
+{
+    assert(batteryIsOk(2, 55, 0.5));
+}
+
+void TestCaseApproachingHigherTemperatureLimit(void)
+{
+    assert(batteryIsOk(43, 55, 0.5));
+}
+
+void TestCaseApproachingDischargeSOC(void) 
+{
+    assert(batteryIsOk(35, 22, 0.5));
+}
+
+void TestCaseApproachingChargePeakSOC(void) 
+{
+    assert(batteryIsOk(35, 78, 0.5));
+}
+
+void TestCaseApproachingMaxChargeRate(void) 
+{
+    assert(batteryIsOk(20, 40, 0.77));
+}
+
+
 int main() {
   init_call();
-  assert(batteryIsOk(25, 70, 0.7));
-  assert(!batteryIsOk(50, 85, 0));
+
+TestCaseCaseTemperatureBelowLowerLimit();
+TestCaseTemperatureAboveUpperLimit();
+TestCaseSocBelowLowerLimit();
+TestCaseSocAboveUpperLimit();
+TestCaseChargeRateAboveUpperLimit();
+TestCaseApproachingLowerTemperatureLimit();
+TestCaseApproachingHigherTemperatureLimit();
+TestCaseApproachingDischargeSOC();
+TestCaseApproachingChargePeakSOC();
+TestCaseApproachingMaxChargeRate();
+
 }
