@@ -54,9 +54,9 @@ TestCaseSocBelowLowerLimit();
 TestCaseSocAboveUpperLimit();
 TestCaseChargeRateAboveUpperLimit();
 TestCaseApproachingLowerTemperatureLimit();
-//TestCaseApproachingHigherTemperatureLimit();
-//TestCaseApproachingDischargeSOC();
-//TestCaseApproachingChargePeakSOC();
-//TestCaseApproachingMaxChargeRate();
+TestCaseApproachingHigherTemperatureLimit();
+TestCaseApproachingDischargeSOC();
+TestCaseApproachingChargePeakSOC();
+TestCaseApproachingMaxChargeRate();
 
 }
