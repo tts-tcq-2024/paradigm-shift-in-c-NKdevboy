@@ -2,6 +2,8 @@
 #include "TestCase.h"
 #include <assert.h>
 
+int batteryIsOk(float Temperature, float Soc, float ChargeRate);
+
 void TestCaseCaseTemperatureBelowLowerLimit(void) 
 {
     assert(!batteryIsOk(-10, 65, 0.5));
