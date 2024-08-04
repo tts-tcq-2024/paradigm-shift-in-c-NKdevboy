@@ -15,4 +15,4 @@
 #endif
 
 void PrintWaringMSGinterface(int WaringType , int CurrentBatteryPro);
-void PrintErrorMsg(ListOfProperties property);
+void PrintErrorMsg(int property);

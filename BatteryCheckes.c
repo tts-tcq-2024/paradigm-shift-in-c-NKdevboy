@@ -8,6 +8,13 @@
 #include "MessagePrinting.h"
 #endif
 
+
+#ifndef MinMaxBatteryProperties_H
+#define MinMaxBatteryProperties_H
+#include "MinMaxBatteryProperties.h"
+#endif
+
+
 BatteryPropertiesChecks ListOfPropertiesCheck[NOOFBATTERYPROPERTYCHECK] = ListProperties;
 
 int batteryTempCheck(float Temperature)

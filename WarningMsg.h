@@ -1,5 +1,6 @@
 #include "StandardMacro.h"
 #include "Language.h"
+#include <stddef.h>
 
 extern const char * ListofWarningMsg[LISTOFLANGUAGE][NOOFBATTERYPROPERTYCHECK][LISTOFWARNINGPERPROPERTIES];
 // ENGLISH WARNING 

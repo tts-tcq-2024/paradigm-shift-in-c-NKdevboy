@@ -8,6 +8,11 @@
 #include "MessagePrinting.h"
 #endif
 
+#ifndef MinMaxValueChecker_H
+#define MinMaxValueChecker_H
+#include "MinMaxValueChecker.h"
+#endif
+
 float CalculateWarningValue(unsigned char CurrentEarlyWar,int CurrentBatteryPro);
 int CheckEarlyWarninginterface(float LowerValue,float LargerValue , float CutValue ,int WarningType);
 void CheckEarlyWarning(float WarningValue,float ValueOfBatteyPro,int CurrentBatteryPro);
