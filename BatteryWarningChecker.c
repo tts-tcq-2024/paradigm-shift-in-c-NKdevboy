@@ -1,5 +1,12 @@
+#ifndef BatteryWarningChecker_H
+#define BatteryWarningChecker_H
 #include "BatteryWarningChecker.h"
+#endif
+
+#ifndef MessagePrinting_H
+#define MessagePrinting_H
 #include "MessagePrinting.h"
+#endif
 
 float CalculateWarningValue(unsigned char CurrentEarlyWar,int CurrentBatteryPro);
 int CheckEarlyWarninginterface(float LowerValue,float LargerValue , float CutValue ,int WarningType);

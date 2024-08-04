@@ -1,9 +1,18 @@
 #include <stdio.h>
 #include <assert.h>
 
+#ifndef StandardMacro_H
+#define StandardMacro_H
 #include "StandardMacro.h"
+#endif
+
 #include "TestCase.h"
+
+#ifndef UserDefineDataTypes_H
+#define UserDefineDataTypes_H
 #include "UserDefineDataTypes.h"
+#endif
+
 #include "MinMaxBatteryProperties.h"
 #include "Language.h"
 #include "BatteryCheckes.h"
@@ -12,7 +21,7 @@
 int batteryIsOk(float Temperature, float Soc, float ChargeRate);
 void CopyBatteryValueToLocalArr(float *arr,float Temperature, float Soc, float ChargeRate);
 
-int CurrentLang ;
+int CurrentLang =0;
 
 void init_BatteryChecker(void)
 {

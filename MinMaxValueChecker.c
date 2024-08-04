@@ -1,4 +1,12 @@
+#ifndef MinMaxValueChecker_H
+#define MinMaxValueChecker_H
 #include "MinMaxValueChecker.h"
+#endif
+
+#ifndef StandardMacro_H
+#define StandardMacro_H
+#include "StandardMacro.h"
+#endif
 
 unsigned char CheckValueLessThanRef(float value,float ref)
 {

@@ -1,5 +1,8 @@
-
+#ifndef MessagePrinting_H
+#define MessagePrinting_H
 #include "MessagePrinting.h"
+#endif
+
 
 void PrintWaringMSGinterface(int WaringType , int CurrentBatteryPro)
 {

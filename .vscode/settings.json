@@ -1,0 +1,15 @@
+{
+    "files.associations": {
+        "batterycheckes.h": "c",
+        "messageprinting.h": "c",
+        "standardmacro.h": "c",
+        "userdefinedatatypes.h": "c",
+        "minmaxvaluechecker.h": "c",
+        "batterywarningchecker.h": "c",
+        "language.h": "c",
+        "warningmsg.h": "c",
+        "errormsg.h": "c",
+        "minmaxbatteryproperties.h": "c",
+        "testcase.h": "c"
+    }
+}

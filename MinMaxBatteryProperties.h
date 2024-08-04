@@ -1,4 +1,7 @@
+#ifndef StandardMacro_H
+#define StandardMacro_H
 #include "StandardMacro.h"
+#endif
 
 extern float MinValues[NOOFBATTERYPROPERTYCHECK];
 extern float MaxValues[NOOFBATTERYPROPERTYCHECK];

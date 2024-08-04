@@ -1,5 +1,12 @@
+#ifndef StandardMacro_H
+#define StandardMacro_H
 #include "StandardMacro.h"
+#endif
+
+#ifndef Language_H
+#define Language_H
 #include "Language.h"
+#endif
 
 extern const char * ListofErrorMsg[LISTOFLANGUAGE][NOOFBATTERYPROPERTYCHECK];
 

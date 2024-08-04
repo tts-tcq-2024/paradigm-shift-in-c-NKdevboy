@@ -1,5 +1,12 @@
+#ifndef BatteryCheckes_H
+#define BatteryCheckes_H
 #include "BatteryCheckes.h"
+#endif
+
+#ifndef MessagePrinting_H
+#define MessagePrinting_H
 #include "MessagePrinting.h"
+#endif
 
 BatteryPropertiesChecks ListOfPropertiesCheck[NOOFBATTERYPROPERTYCHECK] = ListProperties;
 

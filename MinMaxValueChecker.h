@@ -1,4 +1,3 @@
-#include "StandardMacro.h"
 
 unsigned char CheckValueLessThanRef(float value,float ref);
 unsigned char CheckValueGreaterThanRef(float value,float ref);

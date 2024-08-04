@@ -1,4 +1,7 @@
+#ifndef MinMaxBatteryProperties_H
+#define MinMaxBatteryProperties_H
 #include "MinMaxBatteryProperties.h"
+#endif
 
 
 float MinValues[NOOFBATTERYPROPERTYCHECK]={0};
