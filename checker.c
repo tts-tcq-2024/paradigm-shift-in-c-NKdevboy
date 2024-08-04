@@ -14,32 +14,14 @@
 #endif
 
 #include "MinMaxBatteryProperties.h"
-#include "Language.h"
 #include "BatteryCheckes.h"
 #include "BatteryWarningChecker.h"
+#include "BatteryCheckerInit.h"
 
 int batteryIsOk(float Temperature, float Soc, float ChargeRate);
 void CopyBatteryValueToLocalArr(float *arr,float Temperature, float Soc, float ChargeRate);
-
 int CurrentLang =0;
 
-void init_BatteryChecker(void)
-{
-
-	SetCurrentLanguage(ENGLISH);
-
-	SetTempMinValue(MIN_TEMP);
-	SetSocpMinValue(MIN_SOC);
-	SetChargeRateMinValue(MAX_CHAEGERATE);
-	
-	SetTempMaxValue(MAX_TEMP);
-	SetSocpMaxValue(MAX_SOC);
-	SetChargeRateMaxValue(MAX_CHAEGERATE);
-	SetEarlyWarningPer(TEMPERATURE,5);
-	SetEarlyWarningPer(SATEOFCHARGE,5);
-	SetEarlyWarningPer(CHARGERATE,5);
-	
-}
 
 void CopyBatteryValueToLocalArr(float *arr,float Temperature, float Soc, float ChargeRate)
 {
