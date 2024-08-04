@@ -13,6 +13,11 @@
 #include "MinMaxBatteryProperties.h"
 #endif
 
+#ifndef UserDefineDataTypes_H
+#define UserDefineDataTypes_H
+#include "UserDefineDataTypes.h"
+#endif
+
 #include "BatteryCheckerInit.h"
 
 void init_BatteryChecker(void)

@@ -1,6 +1,4 @@
 #include <stdio.h>
-#include <assert.h>
-
 #ifndef StandardMacro_H
 #define StandardMacro_H
 #include "StandardMacro.h"

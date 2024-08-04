@@ -1,5 +1,6 @@
 
 #include "TestCase.h"
+#include <assert.h>
 
 void TestCaseCaseTemperatureBelowLowerLimit(void) 
 {

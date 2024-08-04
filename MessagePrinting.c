@@ -2,7 +2,7 @@
 #define MessagePrinting_H
 #include "MessagePrinting.h"
 #endif
-
+#include <stdio.h>
 
 void PrintWaringMSGinterface(int WaringType , int CurrentBatteryPro)
 {
